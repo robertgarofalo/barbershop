@@ -1,6 +1,18 @@
 'use client'
 import { useState } from 'react'
 import Link from "next/link"
+import {
+    Sheet,
+    SheetContent,
+    SheetDescription,
+    SheetHeader,
+    SheetClose,
+    SheetTitle,
+    SheetTrigger,
+} from './ui/sheet'
+
+import { CiMenuFries } from 'react-icons/ci'
+import { RiMenu3Fill, RiCloseCircleLine, RiCloseFill } from "react-icons/ri";
 
 const links = [
     {
@@ -28,6 +40,7 @@ const links = [
 const Nav = () => {
 
     const [selectedPage, setSelectedPage] = useState('Home')
+    const [isOpen, setIsOpen] = useState(false)
 
     return (
         <div className="flex flex-row justify-between items-center text-white order-1">
@@ -53,7 +66,46 @@ const Nav = () => {
             </button>
 
             {/* Mobile nav */}
+            <Sheet open={isOpen} onOpenChange={setIsOpen}>
+                <SheetTrigger className="flex justify-center items-center lg:hidden">
+                    <RiMenu3Fill className="text-[28px] text-white" />
+                </SheetTrigger>
+                <SheetContent className='bg-secondary border-l-secondary w-full flex flex-col items-center justify-between [&>button:last-child]:hidden'>
 
+                    {/* sheet title removes error */}
+                    <SheetTitle className="hidden" />
+
+                    <div className='flex items-center justify-between w-full '>
+                        <div onClick={() => setIsOpen(false)}>
+                            <h1 className="text-4xl font-semibold hover:text-luxury transition-all duration-400">MODERN MAN.</h1>
+                        </div>
+                        <SheetClose asChild>
+                            {/* ui/sheet.jsx - hidden added to original close button - line 52 */}
+                            <RiCloseFill className='w-7 h-7 cursor-pointer hover:text-luxury transition-all duration-400' />
+                        </SheetClose>
+                    </div>
+
+                    <nav className="flex flex-col gap-14 text-3xl">
+                        {links.map((link, index) => (
+                            <div key={index} onClick={() => setIsOpen(false)}
+                                className='mx-auto hover:text-luxury border-b-2 border-transparent hover:border-b-2 hover:border-accent cursor-pointer'
+                            >
+                                {link.name}
+                            </div>
+                        ))}
+                    </nav>
+
+                    {/* <SocialHeader /> */}
+
+                    <div>
+                        <button 
+                        onClick={() => setIsOpen(false)}
+                        className='flex border-[1px] border-black px-4 py-2 rounded-lg bg-black hover:bg-transparent text-white hover:text-black transition-all duration-300'>
+                            <p>Contact us</p>
+                        </button>
+                    </div>
+                </SheetContent>
+            </Sheet>
         </div>
     )
 }
