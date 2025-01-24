@@ -32,15 +32,15 @@ const Nav = () => {
     return (
         <div className="flex flex-row justify-between items-center text-white">
             {/* logo */}
-            <div>
-                <h1 className="font-bold text-[24px]">MODERN MAN</h1>
+            <div onClick={() => setSelectedPage('Home')}>
+                <h1 className="font-bold text-[24px] cursor-pointer">MODERN MAN</h1>
             </div>
 
             {/* nav */}
             <nav className="flex gap-5 border-[1px] border-white rounded-lg p-1">
                 {links.map((link, index) => (
                     <button key={`link-${index + 1}`}
-                        className={`${selectedPage === link.name ? 'bg-white' : 'bg-transparent'} px-4 py-1 rounded`}
+                        className={`${selectedPage === link.name ? 'bg-white' : 'bg-transparent'} px-4 py-1 rounded transition-all duration-500`}
                         onClick={() => setSelectedPage(link.name)}
                     >
                         <p className={selectedPage === link.name ? 'text-black' : 'text-white'}>{link.name}</p>
@@ -49,7 +49,7 @@ const Nav = () => {
             </nav>
 
             {/* contact button */}
-            <button className='border-[1px] border-white px-4 py-2 rounded-lg bg-white text-black'>
+            <button className='border-[1px] border-white px-4 py-2 rounded-lg bg-white hover:bg-transparent text-black hover:text-white transition-all duration-300'>
                 <p>Contact us</p>
             </button>
         </div>

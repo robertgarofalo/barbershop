@@ -35,12 +35,12 @@ const BookingForm = () => {
 
     return (
         <section className="text-white">
-            <form onSubmit={handleSubmitForm} className="flex flex-col gap-y-4 border-[1.5px] border-white py-10 px-5 rounded-xl w-[360px] ">
+            <form onSubmit={handleSubmitForm} className="flex flex-col gap-y-4 border-[1.5px] border-white py-10 px-5 rounded-xl w-[380px] ">
                 <h3 className='text-[28px] mb-5'>Make an appointment</h3>
                 <input className='text-[12px] placeholder-grey border-[1px] rounded py-2 px-4' type="text" label="name" placeholder="Name" />
                 <input className='text-[12px] placeholder-white bg-transparent border-[1px] rounded py-2 px-4' type="email" label="email" placeholder="Email" />
                 <input className='text-[12px] placeholder-white bg-transparent border-[1px] rounded py-2 px-4' type="number" label="phone" placeholder="Phone" />
-                <div className="flex flex-row justify-between">
+                <div className="flex flex-row justify-between pb-10">
                     <input className='text-[12px] text-center text-white bg-transparent border-[1px] rounded py-2 px-2 ' type="datetime-local" label="name" onChange={(e) => setCurrentDateTime(e.target.value)} value={currentDateTime} />
                     <button className='text-[12px] text-black border-[1px] border-accent bg-accent rounded px-3 '>Submit request</button>
                 </div>
