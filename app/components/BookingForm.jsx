@@ -34,8 +34,8 @@ const BookingForm = () => {
 
 
     return (
-        <section className="text-white">
-            <form onSubmit={handleSubmitForm} className="flex flex-col gap-y-4 border-[1.5px] border-white py-10 px-5 rounded-xl w-[380px] ">
+        <section className="flex flex-row justify-center lg:justify-start text-white order-3 lg:order-2">
+            <form onSubmit={handleSubmitForm} className="flex flex-col gap-y-4 border-[1.5px] border-white py-10 px-5 rounded-xl w-[380px]">
                 <h3 className='text-[28px] mb-5'>Make an appointment</h3>
                 <input className='text-[12px] placeholder-grey border-[1px] rounded py-2 px-4' type="text" label="name" placeholder="Name" />
                 <input className='text-[12px] placeholder-white bg-transparent border-[1px] rounded py-2 px-4' type="email" label="email" placeholder="Email" />
