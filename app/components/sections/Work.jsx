@@ -1,5 +1,5 @@
 'use client'
-import { useState, useRef } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import Image from 'next/image';
 import { Swiper, SwiperSlide, useSwiper } from 'swiper/react';
 
@@ -44,26 +44,32 @@ const Work = () => {
     const swiper1Ref = useRef(null)
     const [isFirstSlide, setIsFirstSlide] = useState(true)
     const [isLastSlide, setIsLastSlide] = useState(false)
-
-    const swiper2 = useSwiper()
+    const [spaceBetween, setSpaceBetween] = useState(50);
 
     return (
-        <div className="w-full h-screen bg-[#ebe0cb] flex flex-col pl-20 py-16">
+        <div className="w-full lg:h-screen bg-[#ebe0cb] flex flex-col px-20 lg:pl-20 py-16">
 
             {/* row 1 - WORK */}
-            <div className='flex flex-row w-full overflow-hidden mb-20'>
-                <div className='flex flex-col justify-evenly w-[30%] h-[50%] '>
+            <div className='flex flex-col items-center lg:items-start lg:flex-row w-full overflow-hidden mb-20'>
+                <div className='flex flex-col justify-evenly w-[80%] lg:w-[30%] h-[100%] text-center lg:text-left gap-5 lg:gap-0'>
                     <h1 className='text-[62px] font-semibold uppercase leading-[70px]'>Discover our work</h1>
                     <p>Our team of experienced barbers is dedicated to their craft. We stay updated with the latest techniques and styles to ensure you get the best service possible.</p>
-                    <div>
+                    <div className='flex flex-row justify-center lg:justify-start'>
                         <WorkSliderButtons swiperRef={swiper1Ref} isFirstSlide={isFirstSlide} isLastSlide={isLastSlide} />
                     </div>
                 </div>
 
-                <div className='w-[70%] h-[50%] translate-x-[50px]'>
+                <div className='w-full lg:w-[70%] lg:translate-x-[50px]'>
                     <Swiper
-                        slidesPerView={4}
-                        spaceBetween={40}
+                        // slidesPerView={4}
+                        breakpoints={{
+                            0: { slidesPerView: 2 },
+                            895: { slidesPerView: 3 },
+                            1060: { slidesPerView: 2 },
+                            1350: { slidesPerView: 3 },
+                            1800: { slidesPerView: 4 }
+                        }}
+                        spaceBetween={50}
                         className=""
                         onSwiper={(swiper) => {
                             swiper1Ref.current = swiper
@@ -76,9 +82,9 @@ const Work = () => {
                         }}
                     >
                         {images.map((image, index) => (
-                            <SwiperSlide key={`${image}-${index}`} className='relative'>
+                            <SwiperSlide key={`${image}-${index}`}>
                                 <Image src={image.path} width={300} height={400} alt={image.name}
-                                    className='rounded-lg min-w-[300px] min-h-[400px] max-h-[400px]'
+                                    className='rounded-lg w-[200px] h-[200px] sm:min-w-[250px] sm:h-[300px] lg:min-w-[300px] lg:min-h-[400px] lg:max-h-[400px]'
                                 />
                             </SwiperSlide>
                         ))}
@@ -87,9 +93,9 @@ const Work = () => {
             </div>
 
             {/* row 2 - PRICES*/}
-            <div className='flex flex-row justify-center gap-20'>
+            <div className='flex flex-col lg:flex-row justify-center items-center lg:gap-20'>
                 {/* testimonials */}
-                <div className='flex flex-col justify-between bg-[#fba95b] w-[450px] h-[300px] rounded-[20px] p-10'>
+                <div className='flex flex-col justify-between bg-[#fba95b] w-[450px] h-[300px] rounded-[20px] p-8 lg:p-10 mb-20 lg:mb-0' >
                     <Swiper
                         slidesPerView={1}
                         // spaceBetween={40}
@@ -101,20 +107,20 @@ const Work = () => {
                     >
                         {testimonials.map((testimonial, index) => (
                             <SwiperSlide key={`${testimonial.name}-testimonial`}>
-                                <p className=''>"{testimonial.text}"</p>
-                                <p className=' text-right font-semibold italic'>{testimonial.name}</p>
+                                <p className='text-[16px]'>"{testimonial.text}"</p>
+                                <p className='text-[16px] mt-5 text-right font-semibold italic'>{testimonial.name}</p>
                             </SwiperSlide>
                         ))}
                     </Swiper>
 
                 </div>
 
-                <div className='w-[700px] flex flex-col px-20'>
-                    <h1 className='uppercase text-[42px] font-semibold'>Our Prices</h1>
+                <div className='w-[450px] md:w-[700px] flex flex-col px-10 xl:px-20'>
+                    <h1 className='uppercase text-[42px] font-semibold text-center lg:text-left'>Our Prices</h1>
                     {pricing.map((item, index) => (
                         <div key={`${item.name}-${index}`} className='flex flex-col my-2 gap-3'>
                             <div className='flex flex-row justify-between w-full'>
-                                <p>{item.name}</p>
+                                <p className='uppercase'>{item.name}</p>
                                 <p>{item.price}</p>
                             </div>
                             <hr className='border-[#b4b4b4]' />
